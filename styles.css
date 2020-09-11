@@ -1,0 +1,12 @@
+header{
+    background-color: #303030;
+}
+header .column{
+    text-align: right;
+}
+#carousel{
+    margin-top:5%;
+}
+#address-form{
+    display: none;
+}
