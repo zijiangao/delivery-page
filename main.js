@@ -5,35 +5,24 @@ $(document).ready(()=>{
     let gst=document.querySelector("#gst")
     let total=document.querySelector("#total")
     let menuList=document.querySelector('.menu')
-
     let menu=["burger","pasta","drink"]
 
     $.ajax({
         url: 'https://api.spoonacular.com/food/menuItems/search?apiKey=cd1cae240d7a4e1db26196fc73ddab53&query='+menu[0]+"&Hooters"+'&number=50',
         success: function(result){
-            //Set result to a variable for writing
-            // addressText.innerHTML=result.results[0].ADDRESS
             console.log(result.menuItems)
             for(let i=0;i<result.menuItems.length;i++){
                 makeProductCard(result.menuItems[i])
             }
-            // makeProductCard(result.menuItems[0])
-            // makeProductCard(result.menuItems[1])
-
         }})
 
     let body=document.querySelector("body")
     body.addEventListener("click",(e)=>{
-        console.log(e.target.classList[2])
-        if(e.target.id==="order-now"){
-
-        }
+        // console.log(e.target.classList[2])
         if(e.target.id==="burgers"){
             $.ajax({
                 url: 'https://api.spoonacular.com/food/menuItems/search?apiKey=cd1cae240d7a4e1db26196fc73ddab53&query='+menu[0]+'&number=50',
                 success: function(result){
-                    //Set result to a variable for writing
-                    // addressText.innerHTML=result.results[0].ADDRESS
                     while (menuList.lastElementChild) {
                         menuList.removeChild(menuList.lastElementChild);
                       }
@@ -41,9 +30,6 @@ $(document).ready(()=>{
                     for(let i=0;i<result.menuItems.length;i++){
                         makeProductCard(result.menuItems[i])
                     }
-                    // makeProductCard(result.menuItems[0])
-                    // makeProductCard(result.menuItems[1])
-        
                 }})
         }
         if(e.target.id==="pasta"){
@@ -51,8 +37,6 @@ $(document).ready(()=>{
                 
                 url: 'https://api.spoonacular.com/food/menuItems/search?apiKey=cd1cae240d7a4e1db26196fc73ddab53&query='+menu[1]+'&number=50',
                 success: function(result){
-                    //Set result to a variable for writing
-                    // addressText.innerHTML=result.results[0].ADDRESS
                     while (menuList.lastElementChild) {
                         menuList.removeChild(menuList.lastElementChild);
                       }
@@ -60,17 +44,12 @@ $(document).ready(()=>{
                     for(let i=0;i<result.menuItems.length;i++){
                         makeProductCard(result.menuItems[i])
                     }
-                    // makeProductCard(result.menuItems[0])
-                    // makeProductCard(result.menuItems[1])
-        
                 }})
         }
         if(e.target.id==="drink"){
             $.ajax({
                 url: 'https://api.spoonacular.com/food/menuItems/search?apiKey=cd1cae240d7a4e1db26196fc73ddab53&query='+menu[2]+'&number=50',
                 success: function(result){
-                    //Set result to a variable for writing
-                    // addressText.innerHTML=result.results[0].ADDRESS
                     while (menuList.lastElementChild) {
                         menuList.removeChild(menuList.lastElementChild);
                       }
@@ -78,9 +57,6 @@ $(document).ready(()=>{
                     for(let i=0;i<result.menuItems.length;i++){
                         makeProductCard(result.menuItems[i])
                     }
-                    // makeProductCard(result.menuItems[0])
-                    // makeProductCard(result.menuItems[1])
-        
                 }})
         }
         if(e.target.id==="postal-code-button"){
@@ -97,7 +73,7 @@ $(document).ready(()=>{
                     addressText.innerHTML=result.results[0].ADDRESS
                     console.log(result.results[0])
                 }})
-                postalCodeForm.style.display="none"
+                // postalCodeForm.style.display="none"
                 addressForm.style.display="block"
                
         }
@@ -107,6 +83,7 @@ $(document).ready(()=>{
             let addressInput=document.querySelector("#address-input").value
             let addressForm=document.querySelector("#address-form")
             let addressText=document.querySelector("#address")
+            let postalCodeForm=document.querySelector("#postal-code-form")
             let main=document.querySelector(".main")
             let checkoutAddress= document.querySelector(".checkout-address table td")
             console.log(addressText)
@@ -114,6 +91,7 @@ $(document).ready(()=>{
             checkoutAddress.innerHTML=addressText.innerHTML + "<br>" + "#" + addressInput      
             
             addressForm.style.display="none"
+            postalCodeForm.style.display="none"
             main.style.display="block"
             
         }
@@ -151,8 +129,6 @@ $(document).ready(()=>{
             let productPrice=e.target.parentNode.parentNode.childNodes[1].childNodes[1].innerHTML.slice(1)
             let checkoutButton=document.querySelector("#checkout-button")
             subTotal.innerHTML="$"+(parseFloat(subTotal.innerHTML.slice(1))-parseFloat(productPrice))
-            
-            
             gst.innerHTML="$"+(parseFloat(subTotal.innerHTML.slice(1))*0.07).toFixed(2)
             total.innerHTML="$"+(parseFloat(subTotal.innerHTML.slice(1))+parseFloat(gst.innerHTML.slice(1))+parseFloat(deliveryCharge.innerHTML.slice(1)))
             productCard.remove()
