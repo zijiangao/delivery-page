@@ -10,3 +10,26 @@ header .column{
 #address-form{
     display: none;
 }
+.main{
+    display:none;
+}
+.product-card{
+    text-align: center;
+    display:inline-block;
+    margin:2px;
+}
+.product-card img{
+    height:auto;
+}
+.product-body h5{
+    height: 50px;
+}
+table, th, td {
+    border: 1px solid black;
+}
+th{
+    width:50%
+}
+#checkout-button{
+    background-color: gray;
+}

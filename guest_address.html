@@ -53,26 +53,14 @@
             <div class="row">
               <div class="page-sidebar col-2">
                 <ul>
-                  <li>Fruits</li>
-                  <li>vegetables</li>
+                  <li id="burgers">Burgers</li>
+                  <li id="pasta">Pasta</li>
+                  <li id="drink">Drink</li>
                 </ul>
               </div>
               <div class="page-content col-10 row">
-                <div class="col-8">
-                  <div class="product-card">
-                    <div class="product-body row">
-                      <img src="">
-                      <h5>product 1</h5>
-                    </div>
-                    <div class="product-footer row">
-                      <div class="product-cost col-6">
-                        <h4 >$11</h4>
-                      </div>
-                      <div class="product-control col-6">
-                        <button type="button" class="btn btn-primary">Primary</button>
-                      </div>
-                    </div>
-                  </div>
+                <div class="menu col-8">
+        
                 </div>
                 <div class="col-4">
                   <div class="checkout-heading">
@@ -107,34 +95,32 @@
                         <tr>
                           <th>Total:</th>
                           <td>
-                            <span>$0.00</span>
+                            <span id="total">$0.00</span>
                           </td>
                         </tr>
                       </tfoot>
                       <tbody>
                         <tr>
                           <th>Sub Total:</th>
-                          <td>$0.00</td>
+                          <td id="sub-total">$0.00</td>
                         </tr>
                         <tr>
                           <th>Delivery Charge:</th>
-                          <td>$0.00</td>
+                          <td id="delivery-charge">$0.00</td>
                         </tr>
                         <tr>
                           <th>GST (7%) Inclusive:</th>
-                          <td>$0.00</td>
+                          <td id="gst">$0.00</td>
                         </tr>
                       </tbody>
                     </table>
-                    <p>You are $10.00 away from the minimum order.</p>
+                   
                     <div class="form-group">
-                      <a href="#" class="btn btn-gray btn-block btn-xl" disabled="disabled">Checkout</a>
+                      <a id="checkout-button" class="btn btn-secondary btn-block">Checkout</a>
                     </div>
                   </div>
-                  <div class="checkout-order-items">
-                    <div>
-                      No items have been added
-                    </div>
+                  <div class="checkout-order-items row">
+                    
                   </div>
                 </div>
               </div>
