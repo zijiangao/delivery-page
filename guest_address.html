@@ -17,7 +17,7 @@
               <label><b>Please enter your postal code</b></label>
               <input id="postal-code-input" class="form-control" placeholder="e.g. 760115">
             </div>
-            <button id="postal-code-button" class="btn btn-primary">Next</button>
+            <button id="postal-code-button" class="btn btn-danger">Next</button>
         </form>
         <form id="address-form">
           <div class="form-group">
@@ -26,16 +26,22 @@
             <p id="address"></p>
             <input id="address-input" class="form-control" placeholder="e.g. 08-500/505">
           </div>
-          <button id="address-button" type="submit" class="btn btn-primary">Confirm Delivery Address</button>
+          <button id="address-button" type="submit" class="btn btn-danger">Confirm Delivery Address</button>
         </form>
         <div class="main">
             <div class="row">
-              <div class="page-sidebar col-2">
-                <ul>
-                  <li id="burgers">Burgers</li>
-                  <li id="pasta">Pasta</li>
-                  <li id="drink">Drink</li>
-                </ul>
+              <div class=" page-sidebar col-2">    
+                <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
+                  <label id="burgers" class="btn btn-danger btn-lg active">
+                    <input type="radio" name="options" id="option1" autocomplete="off" checked> Burgers
+                  </label>
+                  <label id="pasta" class="btn btn-danger btn-lg">
+                    <input type="radio" name="options" id="option2" autocomplete="off"> Pasta
+                  </label>
+                  <label id="drink" class="btn btn-danger btn-lg">
+                    <input type="radio" name="options" id="option3" autocomplete="off"> Drink
+                  </label>
+                </div>
               </div>
               <div class="page-content col-10 row">
                 <div class="menu col-8">
@@ -62,7 +68,7 @@
                           <th>Deliver Time:</th>
                           <td>
                             <b>Estimated Delivery Time:</b>
-                            <span>08/09/2020 22:10</span>
+                            <span id="delivery-time">08/09/2020 22:10</span>
                           </td>
                         </tr>
                       </tbody>
@@ -95,7 +101,7 @@
                     </table>
                    
                     <div class="form-group">
-                      <a id="checkout-button" class="btn btn-secondary btn-block">Checkout</a>
+                      <a id="checkout-button" class="btn btn-primary btn-block">Checkout</a>
                     </div>
                   </div>
                   <div class="checkout-order-items row">

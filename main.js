@@ -7,6 +7,17 @@ $(document).ready(()=>{
     let menuList=document.querySelector('.menu')
     let menu=["burger","pasta","drink"]
 
+    let today = new Date()
+    deliveryTime= new Date(today.getTime() + 60*60000)
+    console.log(deliveryTime)
+    
+    let date = deliveryTime.getFullYear()+'-'+(deliveryTime.getMonth()+1)+'-'+deliveryTime.getDate()
+    let time = deliveryTime.getHours() + ":" + deliveryTime.getMinutes() + ":" + deliveryTime.getSeconds()
+    let dateTime = date+' '+time;
+    let arrivalTime=document.querySelector("#delivery-time")
+    arrivalTime.innerHTML=dateTime
+
+
     $.ajax({
         url: 'https://api.spoonacular.com/food/menuItems/search?apiKey=cd1cae240d7a4e1db26196fc73ddab53&query='+menu[0]+"&Hooters"+'&number=50',
         success: function(result){
@@ -18,7 +29,7 @@ $(document).ready(()=>{
 
     let body=document.querySelector("body")
     body.addEventListener("click",(e)=>{
-        // console.log(e.target.classList[2])
+        console.log(e.target.id)
         if(e.target.id==="burgers"){
             $.ajax({
                 url: 'https://api.spoonacular.com/food/menuItems/search?apiKey=cd1cae240d7a4e1db26196fc73ddab53&query='+menu[0]+'&number=50',
@@ -48,14 +59,14 @@ $(document).ready(()=>{
         }
         if(e.target.id==="drink"){
             $.ajax({
-                url: 'https://api.spoonacular.com/food/menuItems/search?apiKey=cd1cae240d7a4e1db26196fc73ddab53&query='+menu[2]+'&number=50',
+                url: 'https://api.spoonacular.com/food/menuItems/search?apiKey=cd1cae240d7a4e1db26196fc73ddab53&query='+menu[2]+'&number=200',
                 success: function(result){
                     while (menuList.lastElementChild) {
                         menuList.removeChild(menuList.lastElementChild);
                       }
                     console.log(result.menuItems)
                     for(let i=0;i<result.menuItems.length;i++){
-                        makeProductCard(result.menuItems[i])
+                        makeProductCardDrink(result.menuItems[i])
                     }
                 }})
         }
@@ -70,11 +81,17 @@ $(document).ready(()=>{
                 url: 'https://developers.onemap.sg/commonapi/search?searchVal='+postalInput+'&returnGeom=N&getAddrDetails=Y&pageNum=1',
                 success: function(result){
                     //Set result to a variable for writing
-                    addressText.innerHTML=result.results[0].ADDRESS
                     console.log(result.results[0])
+                    if(result.results[0]===undefined){
+                        alert("Cannot find postal code, kindly try another postal code")
+                    }
+                    else{
+                        addressText.innerHTML=result.results[0].ADDRESS
+                        postalCodeForm.style.display="none"
+                        addressForm.style.display="block"
+                    } 
                 }})
-                // postalCodeForm.style.display="none"
-                addressForm.style.display="block"
+                // addressForm.style.display="block"
                
         }
         
@@ -91,7 +108,7 @@ $(document).ready(()=>{
             checkoutAddress.innerHTML=addressText.innerHTML + "<br>" + "#" + addressInput      
             
             addressForm.style.display="none"
-            postalCodeForm.style.display="none"
+            // postalCodeForm.style.display="none"
             main.style.display="block"
             
         }
@@ -116,6 +133,7 @@ $(document).ready(()=>{
             let checkoutOrderItems=document.querySelector(".checkout-order-items")
             checkoutOrderItems.appendChild(productCardCheckOut)
             checkoutButton.style.backgroundColor="blue"
+            checkoutButton.style.color="white"
             return
         }     
         if(e.target.classList[2]==="add-item-button" && e.target.innerHTML==="Remove"){
@@ -163,7 +181,7 @@ function makeProductCard(productObject) {
             <h4>$10</h4>
             </div>
             <div class="product-control col-6">
-            <button type="button" class="btn btn-primary add-item-button">Add</button>
+            <button type="button" class="btn btn-danger add-item-button">Add</button>
             </div>
         </div>
     `) 
@@ -173,6 +191,34 @@ function makeProductCard(productObject) {
         console.log(productObject.title)
         console.log(img.width/img.height)
         if(img.width/img.height>1.4&&img.width/img.height<1.6){
+            document.querySelector('.menu').appendChild(productCard)
+        }
+    } 
+}
+
+function makeProductCardDrink(productObject) {
+    let productCard=document.createElement("div")
+    productCard.className="product-card border col-5"                  
+    productCard.innerHTML=(`
+        <div class="product-body row"> 
+            <img  class="img-fluid img-thumbnail " src=${productObject.image}>
+            <h5>${productObject.title}</h5>
+        </div>
+        <div class="product-footer row">
+            <div class="product-cost col-6">
+            <h4>$10</h4>
+            </div>
+            <div class="product-control col-6">
+            <button type="button" class="btn btn-danger add-item-button">Add</button>
+            </div>
+        </div>
+    `) 
+    let img= document.createElement("img")
+    img.src=productObject.image
+    img.onload=function(){
+        console.log(productObject.title)
+        console.log(img.width/img.height)
+        if(img.width/img.height>0.9&&img.width/img.height<1.0){
             document.querySelector('.menu').appendChild(productCard)
         }
     } 
