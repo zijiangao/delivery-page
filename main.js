@@ -161,7 +161,7 @@ $(document).ready(()=>{
             return
         } 
         if(e.target.id==="checkout-button" && parseFloat(total.innerHTML.slice(1))!==0){
-            alert("Your order has been submitted. Kindly prepare change upon arrival.")
+            alert("Your order has been submitted. Total amount is " + total.innerHTML + ". Kindly prepare change upon arrival.")
             window.location.href = "main.html";
             return
         }           
